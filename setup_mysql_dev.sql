@@ -1,11 +1,11 @@
--- Check if the database exists
+-- prepares a MSSQL server for the project
+
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'hbnb_dev_db')
 BEGIN
-    -- Create the database
+
     CREATE DATABASE hbnb_dev_db;
 END
 
--- Check if the user exists
 IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'hbnb_dev')
 BEGIN
     -- Create the user
