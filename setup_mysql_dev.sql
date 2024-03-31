@@ -1,13 +1,10 @@
--- prepares a MSSQL server for the project
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'hbnb_dev_db')
 BEGIN
-
     CREATE DATABASE hbnb_dev_db;
 END
 
 IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'hbnb_dev')
 BEGIN
-
     CREATE LOGIN hbnb_dev WITH PASSWORD = 'hbnb_dev_pwd';
 END
 

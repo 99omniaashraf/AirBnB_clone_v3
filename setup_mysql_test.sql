@@ -1,5 +1,3 @@
--- prepares a MSSQL server for the project
-
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'hbnb_test_db')
 BEGIN
     CREATE DATABASE hbnb_test_db;
