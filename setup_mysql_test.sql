@@ -1,7 +1,16 @@
--- prepares a MySQL server for the project
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'hbnb_test_db')
+BEGIN
+    CREATE DATABASE hbnb_test_db;
+END
 
-CREATE DATABASE IF NOT EXISTS hbnb_test_db;
-CREATE USER IF NOT EXISTS 'hbnb_test'@'localhost' IDENTIFIED BY 'hbnb_test_pwd';
-GRANT ALL PRIVILEGES ON `hbnb_test_db`.* TO 'hbnb_test'@'localhost';
-GRANT SELECT ON `performance_schema`.* TO 'hbnb_test'@'localhost';
-FLUSH PRIVILEGES;
+IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'hbnb_test')
+BEGIN
+    CREATE LOGIN hbnb_test WITH PASSWORD = 'hbnb_test_pwd';
+END
+
+USE hbnb_test_db;
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'hbnb_test')
+BEGIN
+    CREATE USER hbnb_test FOR LOGIN hbnb_test;
+    ALTER ROLE db_owner ADD MEMBER hbnb_test;
+END
