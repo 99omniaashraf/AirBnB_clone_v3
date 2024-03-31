@@ -9,7 +9,9 @@ from flask import abort, request, jsonify
 
 db_mode = os.getenv("HBNB_TYPE_STORAGE")
 
-@app_views.route("/places/<place_id>/amenities", strict_slashes=False, methods=["GET"])
+
+@app_views.route("/places/<place_id>/amenities",
+                 strict_slashes=False, methods=["GET"])
 def place_amenities(place_id):
     """retrieve place amenities"""
     amenities_list = []
@@ -24,7 +26,9 @@ def place_amenities(place_id):
         amenities_list = place.amenity_ids
     return jsonify(amenities_list)
 
-@app_views.route("/places/<place_id>/amenities/<amenity_id>", strict_slashes=False, methods=["DELETE"])
+
+@app_views.route("/places/<place_id>/amenities/<amenity_id>",
+                 strict_slashes=False, methods=["DELETE"])
 def delete_amenity(place_id, amenity_id):
     """delete an amenity by id"""
     place = storage.get(Place, place_id)
@@ -43,7 +47,9 @@ def delete_amenity(place_id, amenity_id):
     storage.save()
     return jsonify({}), 200
 
-@app_views.route("/places/<place_id>/amenities/<amenity_id>", strict_slashes=False, methods=["POST"])
+
+@app_views.route("/places/<place_id>/amenities/<amenity_id>",
+                 strict_slashes=False, methods=["POST"])
 def link_amenity(place_id, amenity_id):
     """Link Amenity to a Place"""
     place = storage.get(Place, place_id)
